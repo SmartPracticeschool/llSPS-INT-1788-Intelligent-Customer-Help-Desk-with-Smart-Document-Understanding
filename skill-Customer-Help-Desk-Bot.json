@@ -1,0 +1,648 @@
+{
+  "intents": [
+    {
+      "intent": "product_information",
+      "examples": [
+        {
+          "text": "how do i turn on the heater?"
+        },
+        {
+          "text": "how do i access the settings?"
+        },
+        {
+          "text": "sensor settings"
+        },
+        {
+          "text": "how do i configure wifi?"
+        },
+        {
+          "text": "how do i set the time?"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "general",
+      "examples": [
+        {
+          "text": "wow"
+        },
+        {
+          "text": "sure"
+        },
+        {
+          "text": "kk"
+        },
+        {
+          "text": "hm"
+        },
+        {
+          "text": "i see"
+        },
+        {
+          "text": "ohk"
+        },
+        {
+          "text": "ofc"
+        },
+        {
+          "text": "ok"
+        },
+        {
+          "text": "okay"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "thanks",
+      "examples": [
+        {
+          "text": "thanks"
+        },
+        {
+          "text": "thanks a lot"
+        },
+        {
+          "text": "thank you"
+        },
+        {
+          "text": "thank you so much"
+        },
+        {
+          "text": "thank you a lot"
+        },
+        {
+          "text": "thanku"
+        },
+        {
+          "text": "thank you for your service"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "greetings",
+      "examples": [
+        {
+          "text": "good evening"
+        },
+        {
+          "text": "hey"
+        },
+        {
+          "text": "good morning"
+        },
+        {
+          "text": "hello"
+        },
+        {
+          "text": "hi"
+        },
+        {
+          "text": "good afternoon"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "bye",
+      "examples": [
+        {
+          "text": "good bye"
+        },
+        {
+          "text": "okay bye"
+        },
+        {
+          "text": "bye bye"
+        },
+        {
+          "text": "adios"
+        },
+        {
+          "text": "bye"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "enquiry",
+      "examples": [
+        {
+          "text": "at what timing is the customer care service available?"
+        },
+        {
+          "text": "are there any offers available?"
+        },
+        {
+          "text": "what is the timing of customer care services?"
+        },
+        {
+          "text": "what is the loaction of the customer care service center?"
+        },
+        {
+          "text": "where is the service centre?"
+        },
+        {
+          "text": "working hours?"
+        },
+        {
+          "text": "how long do we get your service?"
+        }
+      ],
+      "description": ""
+    }
+  ],
+  "entities": [
+    {
+      "entity": "enquiry",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "timing",
+          "synonyms": [
+            "hour",
+            "working hours",
+            "time"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "location",
+          "synonyms": [
+            "place",
+            "region",
+            "centre"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "offers",
+          "synonyms": [
+            "discount"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "greet",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "good morning",
+          "synonyms": [
+            "gm",
+            "gud morning",
+            "gud morng",
+            "gd mrng",
+            "morning"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "good afternoon",
+          "synonyms": [
+            "ga",
+            "gud afternoon",
+            "gd afternoon",
+            "noon",
+            "gud aftrnoon"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "good evening",
+          "synonyms": [
+            "ge",
+            "evening",
+            "gud evng",
+            "good evng",
+            "gd evng"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    }
+  ],
+  "metadata": {
+    "api_version": {
+      "major_version": "v2",
+      "minor_version": "2018-11-08"
+    }
+  },
+  "webhooks": [
+    {
+      "url": "https://eu-gb.functions.cloud.ibm.com/api/v1/web/si05202000290%40smartinternz.com_dev/default/fetch%20data.json",
+      "name": "main_webhook",
+      "headers": []
+    }
+  ],
+  "dialog_nodes": [
+    {
+      "type": "response_condition",
+      "output": {
+        "text": {
+          "values": [
+            "I didn't understand. Sorry."
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "Anything else",
+      "conditions": "anything_else",
+      "dialog_node": "response_10_1591560365575",
+      "previous_sibling": "response_8_1591560365051"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "text": {
+          "values": [
+            "\"<?$webhook_result_2.passages[0].passage_text?>\""
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "Anything else",
+      "conditions": "$webhook_result_2",
+      "dialog_node": "response_8_1591560365051"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "text": {
+          "values": [
+            "do you want to talk to customer care"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_7_1591557614115",
+      "conditions": "anything_else",
+      "dialog_node": "response_9_1591558034312",
+      "previous_sibling": "response_8_1591558032345"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "\"<?$webhook_result_1.passages[0].passage_text?>\""
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_7_1591557614115",
+      "conditions": "$webhook_result_1",
+      "dialog_node": "response_8_1591558032345"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Good afternoon"
+              },
+              {
+                "text": "Have a great afternoon"
+              },
+              {
+                "text": "Have a peaceful and breezy noon!"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_8_1591381301054",
+      "conditions": "@greet:(good afternoon)",
+      "dialog_node": "response_5_1591381830175",
+      "previous_sibling": "response_1_1591381371000"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Good evening"
+              },
+              {
+                "text": "Have a great evening"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_8_1591381301054",
+      "conditions": "@greet:(good evening)",
+      "dialog_node": "response_3_1591381896805",
+      "previous_sibling": "response_5_1591381830175"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Hi. We are glad to address your queries!"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_8_1591381301054",
+      "conditions": "anything_else",
+      "dialog_node": "response_7_1591381947408",
+      "previous_sibling": "response_3_1591381896805"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Good morning and have a great day ahead!"
+              },
+              {
+                "text": "Have a nice day"
+              },
+              {
+                "text": "Good day!"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_8_1591381301054",
+      "conditions": "@greet:(good morning)",
+      "dialog_node": "response_1_1591381371000"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Kochi, Kerala, India"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_5_1591562532920",
+      "conditions": "@enquiry:location",
+      "dialog_node": "response_7_1591562805234",
+      "previous_sibling": "response_7_1591562566709"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Flat 30% off on our services."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_5_1591562532920",
+      "conditions": "@enquiry:offers",
+      "dialog_node": "response_6_1591562845167",
+      "previous_sibling": "response_7_1591562805234"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "We are always glad to offer our service to you!! We make our service available 24X7"
+              },
+              {
+                "text": "Our services are just a call away. We are there 24X7 to help you!"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_5_1591562532920",
+      "conditions": "@enquiry:timing",
+      "dialog_node": "response_7_1591562566709"
+    },
+    {
+      "type": "standard",
+      "title": "Anything else",
+      "actions": [
+        {
+          "name": "main_webhook",
+          "type": "webhook",
+          "parameters": {
+            "input": "<?input_text?>"
+          },
+          "result_variable": "webhook_result_2"
+        }
+      ],
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "anything_else",
+      "dialog_node": "Anything else",
+      "previous_sibling": "node_2_1591564523433",
+      "disambiguation_opt_out": true
+    },
+    {
+      "type": "standard",
+      "title": "enquiry",
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "#enquiry",
+      "dialog_node": "node_5_1591562532920",
+      "previous_sibling": "node_7_1591557614115"
+    },
+    {
+      "type": "standard",
+      "title": "ask about product",
+      "actions": [
+        {
+          "name": "main_webhook",
+          "type": "webhook",
+          "parameters": {
+            "input": "<?input_text?>"
+          },
+          "result_variable": "webhook_result_1"
+        }
+      ],
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "#product_information",
+      "dialog_node": "node_7_1591557614115",
+      "previous_sibling": "node_8_1591381301054"
+    },
+    {
+      "type": "standard",
+      "title": "welcome",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Welcome. We are always glad to offer our service."
+              },
+              {
+                "text": "No mention please. Always glad to help you."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#thanks",
+      "dialog_node": "node_9_1591563333519",
+      "previous_sibling": "node_5_1591562532920"
+    },
+    {
+      "type": "standard",
+      "title": "general",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "okay:)"
+              },
+              {
+                "text": ":)"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#general",
+      "dialog_node": "node_2_1591564523433",
+      "previous_sibling": "node_3_1591563664906"
+    },
+    {
+      "type": "standard",
+      "title": "greetings",
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "#greetings || @greet",
+      "dialog_node": "node_8_1591381301054",
+      "previous_sibling": "Welcome"
+    },
+    {
+      "type": "standard",
+      "title": "bye",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Bye. Looking forward to help you out by all possible means.Have a great day ahead!"
+              },
+              {
+                "text": "Bye. Thank you for taking our service. Have a nice day."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#bye",
+      "dialog_node": "node_3_1591563664906",
+      "previous_sibling": "node_9_1591563333519"
+    },
+    {
+      "type": "standard",
+      "title": "Welcome",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Hello I am Hasna. Welcome to our customer help desk."
+              },
+              {
+                "text": "How can I help you?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "welcome",
+      "dialog_node": "Welcome"
+    }
+  ],
+  "counterexamples": [],
+  "system_settings": {
+    "off_topic": {
+      "enabled": true
+    },
+    "disambiguation": {
+      "prompt": "Did you mean:",
+      "enabled": true,
+      "randomize": true,
+      "max_suggestions": 5,
+      "suggestion_text_policy": "title",
+      "none_of_the_above_prompt": "None of the above"
+    },
+    "system_entities": {
+      "enabled": true
+    },
+    "human_agent_assist": {
+      "prompt": "Did you mean:"
+    },
+    "spelling_auto_correct": true
+  },
+  "learning_opt_out": false,
+  "name": "Customer Help Desk Bot",
+  "language": "en",
+  "description": ""
+}
